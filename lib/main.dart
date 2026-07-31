@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navigation_flutter/routes/app_router.dart';
 import 'package:navigation_flutter/screens/home_screen.dart';
 import 'package:navigation_flutter/screens/log_in_screen.dart';
 import 'package:navigation_flutter/screens/profile_screen.dart';
@@ -15,14 +16,14 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
-      routes: {
-        '/login': (context) => const LoginScreen(),
-        '/home': (context) => const HomeScreen(),
-        '/profile': (context) => const ProfileScreen(),
-      },
+      // initialRoute: '/login',
+      // routes: {
+      //   '/login': (context) => const LoginScreen(),
+      //   '/home': (context) => const HomeScreen(),
+      //   '/profile': (context) => const ProfileScreen(),
+      // },
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
