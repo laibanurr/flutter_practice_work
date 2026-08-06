@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:navigation_flutter/screens/appshellroute.dart';
 import 'package:navigation_flutter/screens/counter_display_screen.dart';
 import 'package:navigation_flutter/screens/counter_screen.dart';
 import 'package:navigation_flutter/screens/pageA.dart';
 import 'package:navigation_flutter/screens/pageB.dart';
-import 'package:navigation_flutter/screens/shell_screen.dart';
 import 'package:navigation_flutter/screens/userpage.dart';
 
 final GoRouter appRouter = GoRouter(

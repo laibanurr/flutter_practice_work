@@ -27,7 +27,7 @@ class _NotesEditScreenState extends State<NotesEditScreen> {
       body: Center(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               width: 200,
               height: 200,
               child: Center(child: TextField(controller: editedTitle)),
