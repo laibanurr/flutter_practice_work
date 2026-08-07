@@ -5,6 +5,7 @@ import 'package:navigation_flutter/auth/screens/login_screen.dart';
 import 'package:navigation_flutter/dio_api_practice/models/routes/go_routers.dart';
 import 'package:navigation_flutter/dio_api_practice/screens/user_screen.dart';
 import 'package:navigation_flutter/dio_api_practice/screens/user_screen_interceptors.dart';
+import 'package:navigation_flutter/stylingwidgets/popupmenu/simple_pop_up_menu.dart';
 import 'package:navigation_flutter/textformfield/contact_form.dart';
 import 'package:provider/provider.dart';
 import 'provider/user_provider.dart';
@@ -19,9 +20,9 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-     return MaterialApp.router(routerConfig:authRouterApi ,
-    //  return MaterialApp(
-    //    home: LoginScreen(),
+    //  return MaterialApp.router(routerConfig:authRouterApi ,
+     return MaterialApp(
+       home: SimplePopUpMenu(),
     
        debugShowCheckedModeBanner: false,
       // initialRoute: '/login',
