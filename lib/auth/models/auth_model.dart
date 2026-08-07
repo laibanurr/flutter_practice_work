@@ -1,7 +1,6 @@
-
 class AuthData {
-  final String accessToken;
-  final String refreshToken;
+  final String? accessToken;
+  final String? refreshToken;
   final int id;
   final String username;
   final String email;
@@ -11,30 +10,28 @@ class AuthData {
   final String image;
 
   AuthData({
-    required this.accessToken,
+    this.accessToken,
+    this.refreshToken,
     required this.email,
-    required this.refreshToken,
     required this.image,
     required this.gender,
     required this.lastName,
     required this.firstName,
-     required this.username,
-     required this.id
+    required this.username,
+    required this.id,
   });
-   factory AuthData.fromJson(Map<String, dynamic> json){
+
+  factory AuthData.fromJson(Map<String, dynamic> json) {
     return AuthData(
-      
-      accessToken: json['accessToken'], 
-      email: json ['email'],
-       refreshToken: json ['refreshToken'],
-        image: json['image'],
-         gender: json['gender'], 
-         lastName: json['lastName'], 
-         firstName:json['firstName'] ,
-          username: json['username'] ,
-          id: json['id'],
+      accessToken: json['accessToken'],
+      refreshToken: json['refreshToken'],
+      email: json['email'],
+      image: json['image'],
+      gender: json['gender'],
+      lastName: json['lastName'],
+      firstName: json['firstName'],
+      username: json['username'],
+      id: json['id'],
     );
-
-   }
-
+  }
 }
