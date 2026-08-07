@@ -19,11 +19,11 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-     return MaterialApp.router(routerConfig:authRoutes ,
+     return MaterialApp.router(routerConfig:authRouterApi ,
     //  return MaterialApp(
     //    home: LoginScreen(),
     
-    //   debugShowCheckedModeBanner: false,
+       debugShowCheckedModeBanner: false,
       // initialRoute: '/login',
       // routes: {
       //   '/login': (context) => const LoginScreen(),
