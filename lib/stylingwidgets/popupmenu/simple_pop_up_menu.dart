@@ -11,14 +11,30 @@ class SimplePopUpMenu extends StatelessWidget {
         title: Text('Pop Up menu demo'),
         actions: [
           PopupMenuButton<String>(
+            //with a simple value / snackbar
+            // onSelected: (String value) {
+            //   ScaffoldMessenger.of(context).showSnackBar(
+            //     SnackBar(content: Text('you have selected : $value')),
+            //   );
+            // },
+            //with case
             onSelected: (String value) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('you have selected : $value')),
-              );
+              switch (value) {
+                case 'profile':
+                  print('PROFILEEEEEEEEE');
+                  break;
+                case 'settings':
+                  print('SETTINGSSSS');
+                  break;
+                case 'Logout':
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text('LOG TF OUTTTTTTTTT')));
+                  break;
+              }
             },
 
-            itemBuilder: (BuildContext context)=>
-            [
+            itemBuilder: (BuildContext context) => [
               const PopupMenuItem<String>(
                 value: 'profile',
                 child: Text('view profile'),
@@ -26,19 +42,18 @@ class SimplePopUpMenu extends StatelessWidget {
               PopupMenuDivider(),
               const PopupMenuItem<String>(
                 value: 'settings',
-                child:Text('view settings'), ),
-                PopupMenuDivider(),
-                const PopupMenuItem<String>(
-                  value : 'Logout',
-                  child: Text('LOGOUT'))
-            ]
-            
+                child: Text('view settings'),
+              ),
+              PopupMenuDivider(),
+              const PopupMenuItem<String>(
+                value: 'Logout',
+                child: Text('LOGOUT'),
+              ),
+            ],
           ),
         ],
       ),
-      body: Center(
-        child: Text('Tap three dots in appbar'),
-      ),
+      body: Center(child: Text('Tap three dots in appbar')),
     );
   }
 }
