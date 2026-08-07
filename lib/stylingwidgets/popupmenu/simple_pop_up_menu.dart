@@ -37,17 +37,33 @@ class SimplePopUpMenu extends StatelessWidget {
             itemBuilder: (BuildContext context) => [
               const PopupMenuItem<String>(
                 value: 'profile',
-                child: Text('view profile'),
-              ),
+                child: Row(children: [
+                  Icon(Icons.person),
+                  SizedBox(width: 8,),
+                Text('view profile'),
+         ] )),
               PopupMenuDivider(),
               const PopupMenuItem<String>(
                 value: 'settings',
-                child: Text('view settings'),
+                child: Row(
+                  children: [
+                    Icon(Icons.settings),
+                    SizedBox(width: 8),
+                    Text('view settings'),
+                  ],
+                ),
               ),
               PopupMenuDivider(),
               const PopupMenuItem<String>(
+                
                 value: 'Logout',
-                child: Text('LOGOUT'),
+                child: Row(
+                  children: [
+                    Icon(Icons.logout),
+                    SizedBox(width: 8,),
+                    Text('LOGOUT')
+                  ],
+                ),
               ),
             ],
           ),
