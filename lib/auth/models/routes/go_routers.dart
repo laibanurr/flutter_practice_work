@@ -8,11 +8,17 @@ final authService = AuthService(); // ONE instance, created once
 
 final GoRouter authRouterApi = GoRouter(
   initialLocation: '/login',
+  redirect: (context, state) {
+    final isLoggedIn = authService.accessToken != null;
+    final isOnLogin = state.matchedLocation == '/login';
+    if (isLoggedIn && isOnLogin) return '/userprofilescreen';
+    if (!isLoggedIn && !isOnLogin) return '/login';
+    return null;
+  },
   routes: [
     GoRoute(
       path: '/login',
-      builder: (context, state) =>
-      UserLoginScreen(authservice: authService)
+      builder: (context, state) => UserLoginScreen(authservice: authService),
     ),
     GoRoute(
       path: '/userprofilescreen',
