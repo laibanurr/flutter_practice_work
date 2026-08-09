@@ -5,10 +5,24 @@ import 'package:provider/provider.dart';
 class ProductListScreen extends StatelessWidget {
   const ProductListScreen({super.key});
 
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Products List'), centerTitle: false),
+      appBar: AppBar(title: Text('Products List'),
+       centerTitle: false,
+       actions: [
+        Consumer<CartModel>(builder: (context, cart , child){
+          return Badge(
+            label: Text('${cart.itemCount}'),
+             child: Icon(Icons.shopping_cart),
+          );
+        })
+       ],
+       ),
+       
+      
       body: ListView(
         children: ['Shoes', 'bags', 'jewelery'].map((product) {
           return ListTile(
