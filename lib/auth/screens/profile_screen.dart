@@ -37,7 +37,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           'Email': user.email,
           'Gender': user.gender,
           'Image URL': user.image,
-          'Access Token': user.accessToken ?? widget.authService.accessToken ?? 'N/A',
+          'Access Token':
+              user.accessToken ?? widget.authService.accessToken ?? 'N/A',
           'Refresh Token': user.refreshToken ?? 'N/A',
         };
 
@@ -60,10 +61,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               const SizedBox(height: 16),
               const Text(
                 'Complete AuthData Payload',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
               Flexible(
@@ -146,10 +144,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ),
                   ),
                   const PopupMenuDivider(),
-                  const PopupMenuItem<String>(
+                  PopupMenuItem<String>(
                     value: 'logout',
                     child: Row(
-                      children: [
+                      children: const [
                         Icon(Icons.logout, color: Colors.red),
                         SizedBox(width: 12),
                         Text('Logout', style: TextStyle(color: Colors.red)),
@@ -178,8 +176,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.error_outline,
-                        size: 48, color: Colors.redAccent),
+                    const Icon(
+                      Icons.error_outline,
+                      size: 48,
+                      color: Colors.redAccent,
+                    ),
                     const SizedBox(height: 12),
                     Text(
                       'Failed to load profile',
@@ -268,8 +269,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                               color: Colors.deepPurple[50],
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: const Icon(Icons.email_outlined,
-                                color: Colors.deepPurple),
+                            child: const Icon(
+                              Icons.email_outlined,
+                              color: Colors.deepPurple,
+                            ),
                           ),
                           title: const Text('Email Address'),
                           subtitle: Text(user.email),
@@ -282,8 +285,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                               color: Colors.deepPurple[50],
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: const Icon(Icons.person_outline,
-                                color: Colors.deepPurple),
+                            child: const Icon(
+                              Icons.person_outline,
+                              color: Colors.deepPurple,
+                            ),
                           ),
                           title: const Text('Gender'),
                           subtitle: Text(
@@ -299,8 +304,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                               color: Colors.deepPurple[50],
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: const Icon(Icons.tag_outlined,
-                                color: Colors.deepPurple),
+                            child: const Icon(
+                              Icons.tag_outlined,
+                              color: Colors.deepPurple,
+                            ),
                           ),
                           title: const Text('User ID'),
                           subtitle: Text(user.id.toString()),
