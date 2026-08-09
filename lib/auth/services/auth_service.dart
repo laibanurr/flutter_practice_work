@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:navigation_flutter/auth/models/auth_model.dart';
 
 class AuthService {
   final Dio _dio;
   String? accessToken;
+  final _storage = const FlutterSecureStorage();
   AuthService()
     : _dio = Dio(
         BaseOptions(
@@ -41,6 +43,7 @@ class AuthService {
 
       final authData = AuthData.fromJson(response.data);
       accessToken = authData.accessToken;
+      await _storage.write(key: 'access_token', value: authData.accessToken);
       return authData;
     } on DioException catch (e) {
       switch (e.type) {
@@ -65,5 +68,16 @@ class AuthService {
   Future<AuthData> getProfile() async {
     final response = await _dio.get('/auth/me');
     return AuthData.fromJson(response.data);
+  }
+
+  Future<void> loadToken() async {
+    accessToken = await _storage.read(key: 'access_token');
+      print('Loaded token: $accessToken'); // what does this print?
+
+  }
+
+  Future<void> logout() async {
+    accessToken = null;
+    await _storage.delete(key: 'access_token');
   }
 }
