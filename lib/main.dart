@@ -1,5 +1,3 @@
-
-
 // import 'package:flutter/material.dart';
 // import 'package:flutter/widgets.dart';
 // import 'package:navigation_flutter/auth/models/routes/go_routers.dart';
@@ -7,10 +5,10 @@
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
 //   await authService.loadToken();
-  // runApp(
-  //   ChangeNotifierProvider(create: (_) => UserProvider(), child: const MyApp()),
-  // );
-  // runApp(const MyApp());
+// runApp(
+//   ChangeNotifierProvider(create: (_) => UserProvider(), child: const MyApp()),
+// );
+// runApp(const MyApp());
 //}
 
 // class MyApp extends StatelessWidget {
@@ -20,15 +18,15 @@
 //     return MaterialApp.router(
 //       routerConfig: authRouterApi,
 
-      //return MaterialApp(
-      //  home: PopupMenuWithBottomShhet(),
-     // debugShowCheckedModeBanner: false,
-      // initialRoute: '/login',
-      // routes: {
-      //   '/login': (context) => const LoginScreen(),
-      //   '/home': (context) => const HomeScreen(),
-      //   '/profile': (context) => const ProfileScreen(),
-      // },
+//return MaterialApp(
+//  home: PopupMenuWithBottomShhet(),
+// debugShowCheckedModeBanner: false,
+// initialRoute: '/login',
+// routes: {
+//   '/login': (context) => const LoginScreen(),
+//   '/home': (context) => const HomeScreen(),
+//   '/profile': (context) => const ProfileScreen(),
+// },
 //       title: 'Flutter Demo',
 //       theme: ThemeData(
 //         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -37,9 +35,9 @@
 //   }
 // }
 
-
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:navigation_flutter/Riverpod/cart_examplw/product_screen_riverpod.dart';
 import 'package:navigation_flutter/auth/models/routes/go_routers.dart';
 import 'package:navigation_flutter/provider/user_provider.dart';
 import 'package:navigation_flutter/provider_practice/cart/cart_model.dart';
@@ -165,7 +163,7 @@ class MyApp extends StatelessWidget {
 // void main() async {
 //    WidgetsFlutterBinding.ensureInitialized();
 //   await authService.loadToken(); // Uncomment if authService is initialized
-  
+
 //   runApp(
 //     ChangeNotifierProvider(
 //       create: (_) => UserProvider(),
@@ -192,11 +190,16 @@ class MyApp extends StatelessWidget {
 
 import 'package:flutter/material.dart';
 
+// void main() {
+//   runApp(
+//     ChangeNotifierProvider(create: (context)=>CartModel(),
+
+//     child : MyApp()));
+// }
+
+//RIVERPOD
 void main() {
-  runApp(
-    ChangeNotifierProvider(create: (context)=>CartModel(),
-    
-    child : MyApp()));
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -211,7 +214,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:ProductListScreen()
+      home: ProductScreen(),
     );
   }
 }
