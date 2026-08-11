@@ -68,7 +68,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemCount: allFields.length,
-                  separatorBuilder: (_, __) => const Divider(height: 1),
+                  separatorBuilder: (_, _) => const Divider(height: 1),
                   itemBuilder: (context, index) {
                     final key = allFields.keys.elementAt(index);
                     final value = allFields.values.elementAt(index);
