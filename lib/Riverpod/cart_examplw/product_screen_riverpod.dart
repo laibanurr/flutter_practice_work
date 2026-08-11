@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:navigation_flutter/Riverpod/cart_examplw/cart_screen_riverpod.dart';
 import 'package:navigation_flutter/Riverpod/cart_examplw/model_class_cart_notifier.dart';
-import 'package:navigation_flutter/provider_practice/cart/cart_screen.dart';
 
 class ProductScreen extends ConsumerWidget {
   const ProductScreen({super.key});
