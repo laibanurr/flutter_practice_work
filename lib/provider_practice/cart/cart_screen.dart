@@ -15,7 +15,7 @@ class CartScreen extends StatelessWidget {
       body: ListView.builder(
         itemCount: cart.items.length,
         itemBuilder: (context , index)=>ListTile(
-          title: Text("${cart.items[index]}"),
+          title: Text(cart.items[index]),
         )
         ),
     );
