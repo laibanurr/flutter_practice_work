@@ -38,11 +38,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:navigation_flutter/Riverpod/cart_examplw/product_screen_riverpod.dart';
-import 'package:navigation_flutter/auth/models/routes/go_routers.dart';
-import 'package:navigation_flutter/provider/user_provider.dart';
-import 'package:navigation_flutter/provider_practice/cart/cart_model.dart';
-import 'package:navigation_flutter/provider_practice/cart/products_list.dart';
-import 'package:provider/provider.dart';
 // import 'package:provider/provider.dart'; // Uncomment if using Provider
 // import 'package:navigation_flutter/auth/models/routes/go_routers.dart'; // Uncomment for GoRouter
 
@@ -188,7 +183,6 @@ class MyApp extends StatelessWidget {
 //   }
 // }
 
-import 'package:flutter/material.dart';
 
 // void main() {
 //   runApp(
