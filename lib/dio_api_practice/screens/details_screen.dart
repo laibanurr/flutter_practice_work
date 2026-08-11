@@ -4,7 +4,7 @@ import 'package:navigation_flutter/dio_api_practice/services/interceptors.dart';
 
 class DetailsScreenApi extends StatelessWidget {
   final User user;
-  DetailsScreenApi({super.key , required this.user});
+  const DetailsScreenApi({super.key , required this.user});
 
   @override
   Widget build(BuildContext context) {
