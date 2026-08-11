@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:navigation_flutter/auth/models/auth_model.dart';
 
@@ -6,6 +7,12 @@ class AuthService {
   final Dio _dio;
   String? accessToken;
   final _storage = const FlutterSecureStorage();
+  static final _cacheStore = MemCacheStore();
+  static final _cacheOptions = CacheOptions(
+    store: _cacheStore,
+    policy: CachePolicy.request,
+    maxStale: Duration(seconds: 5),
+  );
   AuthService()
     : _dio = Dio(
         BaseOptions(
@@ -32,6 +39,7 @@ class AuthService {
         },
       ),
     );
+    _dio.interceptors.add(DioCacheInterceptor(options: _cacheOptions));
   }
 
   Future<AuthData> login(String username, String password) async {
@@ -72,8 +80,7 @@ class AuthService {
 
   Future<void> loadToken() async {
     accessToken = await _storage.read(key: 'access_token');
-      print('Loaded token: $accessToken'); // what does this print?
-
+    print('Loaded token: $accessToken'); // what does this print?
   }
 
   Future<void> logout() async {
