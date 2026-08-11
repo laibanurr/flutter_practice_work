@@ -8,11 +8,20 @@ class CartScreenRiverpod extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final totalCartItems = ref.watch(cartProvider);
+    final total = ref.watch(totalCartItemsProvider);
     return Scaffold(
-      body: ListView.builder(
-        itemCount: totalCartItems.length,
-        itemBuilder: (context, index) =>
-            ListTile(title: Text(totalCartItems[index])),
+      body: Column(
+        children: [
+          Expanded(child: 
+          ListView.builder(
+            itemCount: totalCartItems.length,
+            itemBuilder: (context, index) =>
+                ListTile(title: Text(totalCartItems[index]))
+          ),
+          ),
+          SizedBox(height: 10,),
+           Text('Total Cart Items : \$$total')
+        ]
       ),
     );
   }
