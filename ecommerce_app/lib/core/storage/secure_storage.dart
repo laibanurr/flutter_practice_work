@@ -1,16 +1,22 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorage {
-  final _storage = const FlutterSecureStorage();
+  static const _storage = FlutterSecureStorage();
+  static const _tokenKey = 'access_token';
 
-  Future<String?> getAccessToken() => _storage.read(key: 'access_token');
-  Future<String?> getRefreshToken() => _storage.read(key: 'refresh_token');
+  static Future<void> saveToken(String token) async {
+    if (kIsWeb) return; // web doesn't support secure storage
+    await _storage.write(key: _tokenKey, value: token);
+  }
 
-  Future<void> saveAccessToken(String token) =>
-      _storage.write(key: 'access_token', value: token);
+  static Future<String?> readToken() async {
+    if (kIsWeb) return null;
+    return await _storage.read(key: _tokenKey);
+  }
 
-  Future<void> saveRefreshToken(String token) =>
-      _storage.write(key: 'refresh_token', value: token);
-
-  Future<void> clearAll() => _storage.deleteAll();
+  static Future<void> deleteToken() async {
+    if (kIsWeb) return;
+    await _storage.delete(key: _tokenKey);
+  }
 }
