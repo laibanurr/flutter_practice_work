@@ -7,13 +7,13 @@ class Product {
   final double discountPercentage;
   final double rating;
   final int stock;
-  final String brand;
+  final String? brand;       // 💡 Changed String to String? (Allows null safely)
   final String thumbnail;
   final List<String> images;
   final List<Review> reviews;
 
   Product({
-    required this.brand,
+    this.brand,              // 💡 Removed 'required' keyword for optional brand field
     required this.category,
     required this.description,
     required this.discountPercentage,
@@ -29,23 +29,27 @@ class Product {
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      brand: json['brand'],
-      category: json['category'],
-      description: json['description'],
-      discountPercentage: (json['discountPercentage'] as num).toDouble(),
-      id: json['id'],
-      images: List<String>.from(json['images']),
-      price: (json['price'] as num).toDouble(),
-      rating: (json['rating'] as num).toDouble(),
-      reviews: (json['reviews'] as List)
-          .map((item) => Review.fromJson(item as Map<String, dynamic>))
-          .toList(),
-      stock: json['stock'],
-      thumbnail: json['thumbnail'],
-      title: json['title'],
+      // 💡 Added fallback values (?? '') or safe castings for null protection
+      brand: json['brand'] as String?, 
+      category: json['category'] ?? '',
+      description: json['description'] ?? '',
+      discountPercentage: (json['discountPercentage'] as num?)?.toDouble() ?? 0.0,
+      id: json['id'] as int,
+      images: json['images'] != null ? List<String>.from(json['images']) : [],
+      price: (json['price'] as num?)?.toDouble() ?? 0.0,
+      rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
+      reviews: json['reviews'] != null 
+          ? (json['reviews'] as List)
+              .map((item) => Review.fromJson(item as Map<String, dynamic>))
+              .toList()
+          : [],
+      stock: json['stock'] ?? 0,
+      thumbnail: json['thumbnail'] ?? '',
+      title: json['title'] ?? '',
     );
   }
 }
+
 
 class Review {
   final int rating;
