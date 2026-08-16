@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_flutter/dio_api_practice/models/user.dart';
-import 'package:navigation_flutter/dio_api_practice/services/interceptors.dart';
 
 class DetailsScreenApi extends StatelessWidget {
   final User user;
