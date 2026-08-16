@@ -36,11 +36,14 @@ class SimplePopUpMenu extends StatelessWidget {
             itemBuilder: (BuildContext context) => [
               const PopupMenuItem<String>(
                 value: 'profile',
-                child: Row(children: [
-                  Icon(Icons.person),
-                  SizedBox(width: 8,),
-                Text('view profile'),
-         ] )),
+                child: Row(
+                  children: [
+                    Icon(Icons.person),
+                    SizedBox(width: 8),
+                    Text('view profile'),
+                  ],
+                ),
+              ),
               PopupMenuDivider(),
               const PopupMenuItem<String>(
                 value: 'settings',
@@ -54,13 +57,12 @@ class SimplePopUpMenu extends StatelessWidget {
               ),
               PopupMenuDivider(),
               const PopupMenuItem<String>(
-                
                 value: 'Logout',
                 child: Row(
                   children: [
                     Icon(Icons.logout),
-                    SizedBox(width: 8,),
-                    Text('LOGOUT')
+                    SizedBox(width: 8),
+                    Text('LOGOUT'),
                   ],
                 ),
               ),
