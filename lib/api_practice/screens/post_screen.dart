@@ -11,12 +11,15 @@ class PostScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.deepPurpleAccent,
         foregroundColor: Colors.white,
-       title : Text('Posts', style: TextStyle(fontSize: 24,
-        fontWeight: FontWeight.bold),
-       ),
-       centerTitle: false,
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-        IconButton(onPressed: (){}, icon: Icon(Icons.favorite_outline))],
+        title: Text(
+          'Posts',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: false,
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.favorite_outline)),
+        ],
       ),
       body: FutureBuilder<List<Post>>(
         future: fetchPosts(),
@@ -46,12 +49,11 @@ class PostScreen extends StatelessWidget {
                           fontSize: 14,
                         ),
                       ),
-                      SizedBox(height: 10,),
-                      Text(post.body,
-                      style: TextStyle(
-                        color: Colors.grey,
-                          fontSize: 12,
-                      ),)
+                      SizedBox(height: 10),
+                      Text(
+                        post.body,
+                        style: TextStyle(color: Colors.grey, fontSize: 12),
+                      ),
                     ],
                   ),
                 ),
