@@ -1,4 +1,3 @@
-
 import 'package:ecommerce_app/cart/screen/cart_screen.dart';
 import 'package:ecommerce_app/features/screens/login_screen.dart';
 import 'package:ecommerce_app/features/services/auth_service.dart';
@@ -6,7 +5,7 @@ import 'package:ecommerce_app/products/screens/product_detail_screen.dart';
 import 'package:ecommerce_app/products/screens/products_screen.dart';
 import 'package:go_router/go_router.dart';
 
-final authService = AuthService();
+final authService = AuthService();// same authService instance
 
 final GoRouter router = GoRouter(
   initialLocation: '/login',
@@ -33,9 +32,6 @@ final GoRouter router = GoRouter(
         return ProductDetailScreen(productId: id);
       },
     ),
-    GoRoute(
-      path: '/cart',
-      builder: (context, state) => const CartScreen(),
-    ),
+    GoRoute(path: '/cart', builder: (context, state) => CartScreen(authService: authService))
   ],
 );
