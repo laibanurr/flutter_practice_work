@@ -1,28 +1,31 @@
 import 'package:ecommerce_app/cart/models/cart_model.dart';
 import 'package:ecommerce_app/cart/services/cart_services.dart';
+import 'package:ecommerce_app/features/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({super.key});
+  final AuthService authService;
+  const CartScreen({super.key , required this.authService});
 
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
 
 class _CartScreenState extends State<CartScreen> {
-  final CartService _cartService = CartService();
+  late final CartService _cartService;
   late Future<Cart> _cartFuture;
 
   @override
   void initState() {
     super.initState();
-    _cartFuture = _cartService.getCart(1); // userId 1 = emilys
+    _cartService = CartService(widget.authService);
+    _cartFuture = _cartService.getCart(); // userId 1 = emilys
   }
 
   Future<void> _deleteCart(int cartId) async {
     try {
       await _cartService.deleteCart(cartId);
-      setState(() => _cartFuture = _cartService.getCart(1));
+      setState(() => _cartFuture = _cartService.getCart());
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -33,9 +36,9 @@ class _CartScreenState extends State<CartScreen> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('$e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('$e')));
       }
     }
   }
@@ -72,7 +75,8 @@ class _CartScreenState extends State<CartScreen> {
                     return Card(
                       margin: const EdgeInsets.only(bottom: 12),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       child: ListTile(
                         contentPadding: const EdgeInsets.all(12),
                         leading: ClipRRect(
@@ -84,24 +88,30 @@ class _CartScreenState extends State<CartScreen> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        title: Text(item.title,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style:
-                                const TextStyle(fontWeight: FontWeight.bold)),
+                        title: Text(
+                          item.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('\$${item.price}',
-                                style: const TextStyle(
-                                    color: Colors.deepPurple,
-                                    fontWeight: FontWeight.bold)),
-                            Text('Qty: ${item.quantity}',
-                                style: TextStyle(color: Colors.grey[600])),
+                            Text(
+                              '\$${item.price}',
+                              style: const TextStyle(
+                                color: Colors.deepPurple,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              'Qty: ${item.quantity}',
+                              style: TextStyle(color: Colors.grey[600]),
+                            ),
                           ],
                         ),
                         trailing: Text(
-                          '\$${item.discountedTotal.toStringAsFixed(2)}',
+                          '\$${item.discountedPrice.toStringAsFixed(2)}',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -128,25 +138,33 @@ class _CartScreenState extends State<CartScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('${cart.totalProducts} items',
-                            style: TextStyle(color: Colors.grey[600])),
-                        Text('\$${cart.total.toStringAsFixed(2)}',
-                            style:
-                                const TextStyle(decoration: TextDecoration.lineThrough)),
+                        Text(
+                          '${cart.totalProducts} items',
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
+                        Text(
+                          '\$${cart.total.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 4),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Total after discount',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        const Text(
+                          'Total after discount',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         Text(
                           '\$${cart.discountedTotal.toStringAsFixed(2)}',
                           style: const TextStyle(
-                              color: Colors.deepPurple,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
+                            color: Colors.deepPurple,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                         ),
                       ],
                     ),
@@ -156,11 +174,11 @@ class _CartScreenState extends State<CartScreen> {
                         Expanded(
                           child: OutlinedButton(
                             style: OutlinedButton.styleFrom(
-                              side:
-                                  const BorderSide(color: Colors.red),
+                              side: const BorderSide(color: Colors.red),
                               foregroundColor: Colors.red,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12)),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
                             onPressed: () => _deleteCart(cart.id),
                             child: const Text('Clear Cart'),
@@ -173,12 +191,12 @@ class _CartScreenState extends State<CartScreen> {
                               backgroundColor: Colors.deepPurple,
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12)),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
                             onPressed: () {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Order placed!')),
+                                const SnackBar(content: Text('Order placed!')),
                               );
                             },
                             child: const Text('Checkout'),
