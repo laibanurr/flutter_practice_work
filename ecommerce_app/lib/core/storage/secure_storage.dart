@@ -14,7 +14,16 @@ class SecureStorage {
     if (kIsWeb) return null;
     return await _storage.read(key: _tokenKey);
   }
+static Future<void> saveUserId(int id) async {
+  if (kIsWeb) return;
+  await _storage.write(key: 'user_id', value: id.toString());
+}
 
+static Future<int?> readUserId() async {
+  if (kIsWeb) return null;
+  final value = await _storage.read(key: 'user_id');
+  return value != null ? int.parse(value) : null;
+}
   static Future<void> deleteToken() async {
     if (kIsWeb) return;
     await _storage.delete(key: _tokenKey);
