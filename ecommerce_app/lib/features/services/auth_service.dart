@@ -7,6 +7,7 @@ import 'package:ecommerce_app/features/models/auth_model.dart';
 class AuthService {
   final Dio _dio = DioClient().dio;
   String? accessToken;
+  int? userId;
 
   Future<AuthData> login(String username, String password) async {
     try {
@@ -16,6 +17,7 @@ class AuthService {
       );
       final authData = AuthData.fromJson(response.data);
       accessToken = authData.accessToken;
+      userId = authData.id;
       await SecureStorage.saveToken(authData.accessToken);
       return authData;
     } on DioException catch (e) {
@@ -32,14 +34,17 @@ class AuthService {
     }
   }
 
-  Future<void> loadToken() async {
-    accessToken = await SecureStorage.readToken();
-  }
+    Future<void> loadToken() async {
+  accessToken = await SecureStorage.readToken();
+  userId = await SecureStorage.readUserId(); // ← add this
+}
+  
 
   Future<void> logout() async {
-    accessToken = null;
-    await SecureStorage.deleteToken();
-  }
+  accessToken = null;
+  userId = null;
+  await SecureStorage.deleteToken();
+}
 
   Exception _handleError(DioException e) {
     switch (e.type) {
