@@ -39,7 +39,8 @@ class CartItem {
   final int quantity;
   final double total;
   final double discountPercentage;
-  final double discountedTotal;
+  final double discountedPrice; // rename field
+
   final String thumbnail;
 
   CartItem({
@@ -49,7 +50,7 @@ class CartItem {
     required this.quantity,
     required this.total,
     required this.discountPercentage,
-    required this.discountedTotal,
+required this.discountedPrice,
     required this.thumbnail,
   });
 
@@ -61,7 +62,7 @@ class CartItem {
       quantity: json['quantity'],
       total: (json['total'] as num).toDouble(),
       discountPercentage: (json['discountPercentage'] as num).toDouble(),
-      discountedTotal: (json['discountedTotal'] as num).toDouble(),
+      discountedPrice: (json['discountedTotal'] ?? json['discountedPrice'] as num).toDouble(),
       thumbnail: json['thumbnail'],
     );
   }
