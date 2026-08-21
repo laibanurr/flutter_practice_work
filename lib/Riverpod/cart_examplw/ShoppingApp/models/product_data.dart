@@ -24,7 +24,7 @@ class Product {
     required this.reviews,
     required this.stock,
     required this.thumbnail,
-    required this.title,
+    required this.title, required name,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -42,7 +42,7 @@ class Product {
           .toList(),
       stock: json['stock'],
       thumbnail: json['thumbnail'],
-      title: json['title'],
+      title: json['title'], name: null,
     );
   }
 }

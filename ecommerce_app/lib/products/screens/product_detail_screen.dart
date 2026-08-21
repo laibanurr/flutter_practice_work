@@ -2,6 +2,7 @@
 import 'package:ecommerce_app/cart/services/cart_services.dart';
 import 'package:ecommerce_app/products/model/product_model.dart';
 import 'package:ecommerce_app/products/service/product_service.dart';
+import 'package:ecommerce_app/routers.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class ProductDetailScreen extends StatefulWidget {
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   final ProductService _productService = ProductService();
-  final CartService _cartService = CartService();
+  final CartService _cartService = CartService(authService);
   late Future<Product> _productFuture;
   bool _addingToCart = false;
 
