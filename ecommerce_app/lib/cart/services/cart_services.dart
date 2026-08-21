@@ -2,14 +2,17 @@ import 'package:dio/dio.dart';
 import 'package:ecommerce_app/cart/models/cart_model.dart';
 import 'package:ecommerce_app/core/constants/api_constants.dart';
 import 'package:ecommerce_app/core/network/dio_client.dart';
+import 'package:ecommerce_app/features/services/auth_service.dart';
 
 class CartService {
   final Dio _dio = DioClient().dio;
+  final AuthService authService;
+  CartService(this.authService);
 
   // GET — fetch user's cart
-  Future<Cart> getCart(int userId) async {
+  Future<Cart> getCart() async {
     try {
-      final response = await _dio.get('${ApiConstants.cart}/user/$userId');
+      final response = await _dio.get('${ApiConstants.cart}/user/${authService.userId}');
       // response returns { carts: [...] } — take first cart
       final List<dynamic> carts = response.data['carts'];
       if (carts.isEmpty) throw Exception('No cart found');
@@ -25,9 +28,9 @@ class CartService {
       final response = await _dio.post(
         '${ApiConstants.cart}/add',
         data: {
-          'userId': 1, // hardcoded for now — replace with real userId
+          'userId': authService.userId, // hardcoded for now — replace with real userId
           'products': [
-            {'id': productId, 'quantity': quantity}
+            {'id': productId, 'quantity': quantity},
           ],
         },
       );
@@ -44,7 +47,7 @@ class CartService {
         '${ApiConstants.cart}/$cartId',
         data: {
           'products': [
-            {'id': productId, 'quantity': quantity}
+            {'id': productId, 'quantity': quantity},
           ],
         },
       );
@@ -61,7 +64,7 @@ class CartService {
         '${ApiConstants.cart}/$cartId',
         data: {
           'products': [
-            {'id': productId, 'quantity': quantity}
+            {'id': productId, 'quantity': quantity},
           ],
         },
       );
