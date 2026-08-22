@@ -37,6 +37,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:navigation_flutter/Riverpod/Riverpod_demo/Future/future_provider_screen.dart';
+import 'package:navigation_flutter/Riverpod/Riverpod_demo/Quote/feature/screen/Quote_display_screen.dart';
 import 'package:navigation_flutter/Riverpod/Riverpod_demo/screens/product_screen.dart';
 // import 'package:provider/provider.dart'; // Uncomment if using Provider
 // import 'package:navigation_flutter/auth/models/routes/go_routers.dart'; // Uncomment for GoRouter
@@ -208,7 +210,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: ProductDisplayScreen(),
+      home: QuoteDisplayScreen(),
     );
   }
 }
